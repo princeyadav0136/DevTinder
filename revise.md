@@ -11,3 +11,8 @@
 - Listen to Port 3000
 - Write Request Handler for /test and /hello
 - Install Nodemon and update scripts inside package.json
+
+- Initialize Git 
+- .gitignore
+- Create a remote repo in github
+- Push all code to remote origin
