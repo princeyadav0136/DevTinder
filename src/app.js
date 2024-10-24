@@ -4,8 +4,14 @@ const { adminAuth, userAuth } = require("./middlewares/auth");
 const app = express();
 
 app.get("/getUserData", (req, res) => {
-  throw new Error("dvdddkflf");
+  
+  try {
+    throw new Error("dvdddkflf");
   res.send("User Data Sent");
+  }
+  catch(err) {
+    res.status(500).send("Some error occured");
+  }
 });
 
 app.use("/", (err, req, res, next) => {
