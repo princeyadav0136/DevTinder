@@ -32,3 +32,5 @@
 - What is middleware 
 - How express JS basically handles requests behind the scenes
 - Difference between app.use and app.all
+- Write a dummy auth middleware for admin
+- Write a dummy auth middleware for all user routes, except /user/login

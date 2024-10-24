@@ -14,9 +14,14 @@ app.delete("/admin/deleteAllData", (req, res) => {
   res.send("Delete All data");
 });
 
-app.get("/user", userAuth, (req,res) => {
-    res.send("User Data called")
-})
+// only use for get API and not want to check for post user
+app.get("/user", userAuth, (req, res) => {
+  res.send("User Data called");
+});
+
+app.post("/user/login", (req, res) => {
+  res.send("User Logged In Successfully");
+});
 
 // // This will only handle GET call to /user
 // app.get("/user", (req, res) => {
