@@ -24,3 +24,5 @@
 - Explore routing and use of ?, +, *, (), and regex in the routes
 - Reading the query params  in the routes
 - Reading the dynamic routes
+
+- Play with multiple route handler and use of next()
