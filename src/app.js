@@ -3,46 +3,16 @@ const { adminAuth, userAuth } = require("./middlewares/auth");
 
 const app = express();
 
-// Handle Auth Middleware for GET, POST, .... requests
-app.use("/admin", adminAuth);
-
-app.get("/admin/getAllData", (req, res) => {
-  res.send("All data sent");
+app.get("/getUserData", (req, res) => {
+  throw new Error("dvdddkflf");
+  res.send("User Data Sent");
 });
 
-app.delete("/admin/deleteAllData", (req, res) => {
-  res.send("Delete All data");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("something went wrong");
+  }
 });
-
-// only use for get API and not want to check for post user
-app.get("/user", userAuth, (req, res) => {
-  res.send("User Data called");
-});
-
-app.post("/user/login", (req, res) => {
-  res.send("User Logged In Successfully");
-});
-
-// // This will only handle GET call to /user
-// app.get("/user", (req, res) => {
-//   res.send({ firstName: "Prince", secondName: "Yadav" });
-// });
-
-// //This will only handle POST call to /user
-// app.post("/user", (req, res) => {
-//   console.log("Saving data to db");
-//   res.send("Data saved successfully");
-// });
-
-// //this will only handle delete to /user
-// app.delete("/user", (req, res) => {
-//   res.send("Deleted Successfully");
-// });
-
-// // use will match all the HTTP method to /hello
-// app.use("/hello", (req, res) => {
-//   res.send("hello hello hello");
-// });
 
 app.listen(8000, () => {
   console.log("Server is successfully listening on Port 8000 ...");
