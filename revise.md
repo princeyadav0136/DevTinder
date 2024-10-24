@@ -16,3 +16,8 @@
 - .gitignore
 - Create a remote repo in github
 - Push all code to remote origin
+
+- Play with routes and its extension ex /hello /hello/2 /
+- Order of routes matter a lot
+- Install PostMan App and make a workspace/collection > test Get Api call
+- Write logic to handle GET, POST, PUT, PATCH, DELETE API calls and test them on Postman
