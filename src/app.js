@@ -1,5 +1,5 @@
 const express = require("express");
-const { adminAuth } = require("./middlewares/auth");
+const { adminAuth, userAuth } = require("./middlewares/auth");
 
 const app = express();
 
@@ -13,6 +13,10 @@ app.get("/admin/getAllData", (req, res) => {
 app.delete("/admin/deleteAllData", (req, res) => {
   res.send("Delete All data");
 });
+
+app.get("/user", userAuth, (req,res) => {
+    res.send("User Data called")
+})
 
 // // This will only handle GET call to /user
 // app.get("/user", (req, res) => {
