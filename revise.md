@@ -35,3 +35,8 @@
 - Write a dummy auth middleware for admin
 - Write a dummy auth middleware for all user routes, except /user/login
 - Error Handling using app.use()
+
+- Create a free cluster on mongodb official website (Mongo Atlas)
+- Install Mongoose Library 
+- Connect your application to the database "connection-url"/devTinder
+- Call the connectDB function and connect to databse before starting application on server
