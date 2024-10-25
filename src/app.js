@@ -4,16 +4,12 @@ const User = require("./models/user");
 
 const app = express();
 
-app.post("/signup", async (req, res) => {
-  console.log("Post Api called");
-  // Create a new instance of the User model
-  const user = new User({
-    firstName: "Priya",
-    lastName: "Yadav",
-    email: "priyadav013@gmail.com",
-    password: "73682",
-  });
+app.use(express.json());
 
+app.post("/signup", async (req, res) => {
+  // Read the data
+  console.log(req.body);
+  const user = new User(req.body);
   try {
     await user.save();
     res.send("User Added Successfully");

@@ -44,3 +44,7 @@
 - Create POST /signup API to add data to the database
 - Push some documents using API calls from postman
 - Error Handling using try and catch
+
+- Difference b/w json and javascript object
+- Add the express.json() middleware to your app
+- Make your signup dynamic to receive data from end user
