@@ -50,3 +50,4 @@
 - Make your signup dynamic to receive data from end user
 - API - Get user by email
 - API - Get all the users from the database
+- Create a delete User API
