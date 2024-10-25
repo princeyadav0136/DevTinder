@@ -51,3 +51,7 @@
 - API - Get user by email
 - API - Get all the users from the database
 - Create a delete User API
+- Difference b/w PATCH and PUT
+- API - Update User
+- Explore mongoose doc for update and options 
+- API - Update the user data by email
