@@ -40,3 +40,4 @@
 - Install Mongoose Library 
 - Connect your application to the database "connection-url"/devTinder
 - Call the connectDB function and connect to databse before starting application on server
+- Create a userSchema and user model
