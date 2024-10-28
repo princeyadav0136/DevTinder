@@ -66,3 +66,7 @@
 - Add API validation for each field
 - Install Validator 
 - Explore Validator Library Function and use validator for email, password, url 
+
+- Validate data in signup API
+- Install bcrypt library
+- Create a passwordHash using bcrypt.hash & save the user with encrypted password

@@ -1,6 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/databse");
 const User = require("./models/user");
+const validationSignupData = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -9,13 +11,27 @@ app.use(express.json());
 // signup the user
 app.post("/signup", async (req, res) => {
   // Read the data
-  console.log(req.body);
-  const user = new User(req.body);
   try {
+    console.log(req.body);
+    const { firstName, lastName, email, password } = req.body;
+
+    //validation of data
+    validationSignupData(req);
+
+    //encrypting password;
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password: hashPassword,
+    });
+
     await user.save();
     res.send("User Added Successfully");
   } catch (err) {
-    res.status(400).send({ error: err.message });
+    res.status(400).send("error: " + err.message);
   }
 });
 
