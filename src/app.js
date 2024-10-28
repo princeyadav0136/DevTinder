@@ -3,10 +3,12 @@ const connectDB = require("./config/databse");
 const User = require("./models/user");
 const validationSignupData = require("./utils/validation");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const app = express();
+const cookieParser = require("cookie-parser")
 
 app.use(express.json());
+app.use(cookieParser());
 
 // signup the user
 app.post("/signup", async (req, res) => {
@@ -47,10 +49,41 @@ app.post("/login", async (req, res) => {
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (isPasswordValid) {
+      //create token
+      const token = await jwt.sign({ _id: user._id }, "SceretKeyNamasteNode");
+
+      //add token to cookie
+      res.cookie("token", token);
       res.send("Login Successfull!!!");
     } else {
       throw new Error("Invalid Credentials");
     }
+  } catch (err) {
+    res.status(400).send("error: " + err.message);
+  }
+});
+
+//get profile of user
+app.get("/profile", async (req, res) => {
+  try {
+    const cookies = req.cookies;
+    const { token } = cookies;
+
+    if (!token) {
+      throw new Error("Invalid Token");
+    }
+
+    const decodedMessage = await jwt.verify(token, "SceretKeyNamasteNode");
+    const { _id } = decodedMessage;
+    console.log("Logged in User is : " + _id);
+
+    const user = await User.findById(_id);
+
+    if (!user) {
+      throw new Error("User does not exist");
+    }
+
+    res.send(user)
   } catch (err) {
     res.status(400).send("error: " + err.message);
   }
