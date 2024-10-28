@@ -64,3 +64,5 @@
 - Add timestamps to the user schema
 - Add API level validation on Patch Request and signup post API
 - Add API validation for each field
+- Install Validator 
+- Explore Validator Library Function and use validator for email, password, url 
