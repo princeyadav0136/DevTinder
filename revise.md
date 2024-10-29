@@ -90,3 +90,4 @@
 - Create routes folder fr managing auth, profile, request routers
 - Create authRouter, profileROuter, requestRouter
 - Import these routers in app.js
+- Logout API 
