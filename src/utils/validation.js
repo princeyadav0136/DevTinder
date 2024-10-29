@@ -34,4 +34,21 @@ const validationEditData = (req) => {
   return isUpdateAllowed;
 };
 
-module.exports = {validationSignupData, validationEditData};
+const validationForgotPassword = (req) => {
+  const ALLOWED_UPDATES = ["password"];
+  const isUpdateAllowed = Object.keys(req.body).every((key) =>
+    ALLOWED_UPDATES.includes(key)
+  );
+  if(!isUpdateAllowed){
+    throw new Error("Invalid Edit Request")
+  }
+  if (!validator.isStrongPassword(req.body.password)) {
+    throw new Error("Enter Strong Password");
+  }
+};
+
+module.exports = {
+  validationSignupData,
+  validationEditData,
+  validationForgotPassword,
+};

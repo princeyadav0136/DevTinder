@@ -92,3 +92,5 @@
 - Import these routers in app.js
 - Logout API 
 - Create /profile/edit api and test ALL API
+- Create PATCH /forgotpassword api
+- Forgot Password API
