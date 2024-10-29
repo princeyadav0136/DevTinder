@@ -3,7 +3,6 @@ const connectDB = require("./config/databse");
 const User = require("./models/user");
 const validationSignupData = require("./utils/validation");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const app = express();
 const cookieParser = require("cookie-parser");
 const { userAuth } = require("./middlewares/auth");
@@ -48,12 +47,10 @@ app.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = user.validatePassword(password);
     if (isPasswordValid) {
       //create token
-      const token = await jwt.sign({ _id: user._id }, "SceretKeyNamasteNode", {
-        expiresIn: "7d",
-      });
+      const token = user.getJWT();
 
       //add token to cookie
       res.cookie("token", token, {

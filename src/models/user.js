@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const validator = require("validator")
+const validator = require("validator");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
@@ -18,19 +19,19 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       validate(value) {
-        if(!validator.isEmail(value)){
-          throw new Error("Invalid email address: " + value)
+        if (!validator.isEmail(value)) {
+          throw new Error("Invalid email address: " + value);
         }
-      }
+      },
     },
     password: {
       type: String,
       required: true,
-      validate(value){
-        if(!validator.isStrongPassword(value)){
-          throw new Error("Enter Strong Password")
+      validate(value) {
+        if (!validator.isStrongPassword(value)) {
+          throw new Error("Enter Strong Password");
         }
-      }
+      },
     },
     age: {
       type: Number,
@@ -48,10 +49,10 @@ const userSchema = new mongoose.Schema(
       default:
         "https://th.bing.com/th/id/OIP.SKLwxXLZcb8SZD4y183svAAAAA?rs=1&pid=ImgDetMain",
       validate(value) {
-        if(!validator.isURL(value)){
-          throw new Error("Invalid Photo URL: " + value)
+        if (!validator.isURL(value)) {
+          throw new Error("Invalid Photo URL: " + value);
         }
-      }
+      },
     },
     about: {
       type: String,
@@ -65,5 +66,18 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.methods.getJWT = async function () {
+  const token = await jwt.sign({ _id: this._id }, "SceretKeyNamasteNode", {
+    expiresIn: "7d",
+  });
+
+  return token;
+};
+
+userSchema.methods.validatePassword = async function (password) {
+  const isPasswordValid = await bcrypt.compare(password, this.password);
+  return isPasswordValid;
+};
 
 module.exports = mongoose.model("User", userSchema);
