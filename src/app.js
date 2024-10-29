@@ -47,11 +47,11 @@ app.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
 
-    const isPasswordValid = user.validatePassword(password);
+    const isPasswordValid = await user.validatePassword(password);
     if (isPasswordValid) {
       //create token
-      const token = user.getJWT();
-
+      const token = await user.getJWT();
+      console.log(token)
       //add token to cookie
       res.cookie("token", token, {
         expires: new Date(Date.now() + 7 * 24 * 3600000),
