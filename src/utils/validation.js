@@ -39,11 +39,18 @@ const validationForgotPassword = (req) => {
   const isUpdateAllowed = Object.keys(req.body).every((key) =>
     ALLOWED_UPDATES.includes(key)
   );
-  if(!isUpdateAllowed){
-    throw new Error("Invalid Edit Request")
+  if (!isUpdateAllowed) {
+    throw new Error("Invalid Edit Request");
   }
   if (!validator.isStrongPassword(req.body.password)) {
     throw new Error("Enter Strong Password");
+  }
+};
+
+const validationSendStatus = (req) => {
+  const ALLOWED_STATUS = ["interested", "ignored"];
+  if (!ALLOWED_STATUS.includes(req.params.status)) {
+    throw new Error("Status is not Correct");
   }
 };
 
@@ -51,4 +58,5 @@ module.exports = {
   validationSignupData,
   validationEditData,
   validationForgotPassword,
+  validationSendStatus,
 };
