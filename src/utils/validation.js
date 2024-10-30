@@ -54,9 +54,17 @@ const validationSendStatus = (req) => {
   }
 };
 
+const validationReceiveStatus = (req) => {
+  const ALLOWED_STATUS = ["accepted", "rejected"];
+  if (!ALLOWED_STATUS.includes(req.params.status)) {
+    throw new Error("Status is not Correct");
+  }
+};
+
 module.exports = {
   validationSignupData,
   validationEditData,
   validationForgotPassword,
   validationSendStatus,
+  validationReceiveStatus,
 };

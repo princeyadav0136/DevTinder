@@ -12,9 +12,6 @@
 
 ## connectionRequestRouter
 - POST /request/send/:status/:userId
-- POST /request/send/:status/:userId
-
-- POST /request/review/:status/:requestId
 - POST /request/review/:status/:requestId
 
 - Status = for send [interested, ignored], for receive[accepted, rejected]
