@@ -95,5 +95,9 @@
 - Create PATCH /forgotpassword api
 - Forgot Password API
 
+- Create Connection Requeest Schema
 - Send Connection Request API
+- Think about all corner case
+- $or and @and query 
+- schema.pre("save" ...)
 - Read About Compound Indexes
