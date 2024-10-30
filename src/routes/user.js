@@ -66,6 +66,10 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
+    const page = req.query.page || 1;
+    let limit = req.query.limit || 10;
+    limit = limit > 50 ? 50 : limit;
+    const skip = (page - 1) * limit;
     // user should see all the user cards expect
     // 0. his own card
     // 1. his connections
@@ -97,9 +101,12 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         { _id: { $nin: Array.from(hideUserfromFeed) } },
         { _id: { $ne: loggedInUser._id } },
       ],
-    }).select("firstName lastName skills age gender about photoUrl");
+    })
+      .select("firstName lastName skills age gender about photoUrl")
+      .skip(skip)
+      .limit(limit);
 
-    res.json({ message: "Users Fetched Successfully !!!", data: users });
+    res.json({ message: "Users Fetched Successfully !!!", data: users , count: users.length});
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
