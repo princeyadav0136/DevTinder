@@ -106,3 +106,4 @@
 - Thought process - POST vs GET Api
 - Read about ref and populate 
 - Create GET /user/requests/received with all the checks
+- Create GET /user/connections
